@@ -1,13 +1,19 @@
 <?php
 session_start();
+<<<<<<< HEAD
 require_once("config.php");
 
 // Only admin can access
+=======
+require_once ("config.php");
+
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
     header("Location: ../mlogin.php");
     exit();
 }
 
+<<<<<<< HEAD
 $message = "";
 $error_message = "";
 $section = (isset($_GET['section']) && $_GET['section'] === "users") ? "users" : "sessions";
@@ -110,6 +116,13 @@ $users_query = $conn->query("SELECT emp_id, username, email FROM employee ORDER 
 if ($users_query) {
     while ($row = $users_query->fetch_assoc()) {
         $users[] = $row;
+=======
+$employees = [];
+$result = $conn->query("SELECT emp_id, username FROM employee ORDER BY username ASC");
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $employees[] = $row;
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
     }
 }
 ?>
@@ -127,6 +140,7 @@ if ($users_query) {
     </div>
 
     <div class="box">
+<<<<<<< HEAD
         <form method="GET" style="margin-bottom:14px; display:flex; gap:10px; align-items:center;">
             <label for="section"><strong>Choose Section:</strong></label>
             <select name="section" id="section" onchange="this.form.submit()">
@@ -238,6 +252,31 @@ if ($users_query) {
             </table>
         <?php } ?>
 
+=======
+        <h3>Employee List</h3>
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($employees)) { ?>
+                    <tr>
+                        <td colspan="2">No employees found.</td>
+                    </tr>
+                <?php } else { ?>
+                    <?php foreach ($employees as $employee) { ?>
+                        <tr>
+                            <td><?php echo (int)$employee['emp_id']; ?></td>
+                            <td><?php echo htmlspecialchars($employee['username'], ENT_QUOTES, "UTF-8"); ?></td>
+                        </tr>
+                    <?php } ?>
+                <?php } ?>
+            </tbody>
+        </table>
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
     </div>
 </div>
 

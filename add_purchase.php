@@ -9,12 +9,20 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== "admin"){
 
 $message = "";
 
+<<<<<<< HEAD
+=======
+// Handle form submit
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $purchase_id = $_POST['purchase_id'];   
     $vendor_id = $_POST['vendor_id'];       
     $purchase_date = $_POST['purchase_date'];
 
+<<<<<<< HEAD
+=======
+    // Step 1: insert purchase with total_amount = 0 first
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
     $stmt = $conn->prepare("INSERT INTO purchase (purchase_id, vendor_id, purchase_date, total_amount) VALUES (?,?,?,0)");
     $stmt->bind_param("sss", $purchase_id, $vendor_id, $purchase_date);
     $stmt->execute();
@@ -22,8 +30,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $total_amount = 0;
 
+<<<<<<< HEAD
     foreach($_POST['medicine_id'] as $i => $med_id){
 
+=======
+    // Step 2: Insert purchase_details (arrays)
+    foreach($_POST['medicine_id'] as $i => $med_id){
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
         $admin_id = $_POST['admin_id'][$i];
         $quantity = $_POST['quantity'][$i];
         $cost_price = $_POST['cost_price'][$i];
@@ -37,6 +50,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $stmt2->bind_param("sssiii", $detail_id, $purchase_id, $med_id, $admin_id, $quantity, $cost_price);
         $stmt2->execute();
         $stmt2->close();
+<<<<<<< HEAD
 
         /* 🔥 STOCK UPDATE (INCREASE INVENTORY) */
 
@@ -55,6 +69,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     }
 
+=======
+    }
+
+    // Step 3: Update purchase total_amount
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
     $stmt3 = $conn->prepare("UPDATE purchase SET total_amount=? WHERE purchase_id=?");
     $stmt3->bind_param("ds", $total_amount, $purchase_id);
     $stmt3->execute();
@@ -63,6 +82,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $message = "Purchase added successfully! Total Amount: ₹" . $total_amount;
 }
 
+<<<<<<< HEAD
+=======
+// Fetch existing purchase_details with medicine & admin names
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
 $sql = "
 SELECT pd.purchase_detail_id, pd.purchase_id, pd.medicine_id, pr.medicine_name, pd.admin_id, a.username AS admin_name, pd.quantity, pd.cost_price
 FROM purchase_details pd
@@ -78,6 +101,10 @@ if($result){
     }
 }
 
+<<<<<<< HEAD
+=======
+// Fetch vendors, admins, and products for dropdowns
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
 $vendor_result = $conn->query("SELECT vendor_id, name FROM vendor");
 $vendors = $vendor_result->fetch_all(MYSQLI_ASSOC);
 
@@ -91,7 +118,10 @@ include("header.php");
 include("sidebar.php");
 ?>
 
+<<<<<<< HEAD
 <!-- REST OF YOUR HTML CODE REMAINS EXACTLY SAME -->
+=======
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
 <div class="main">
     <div class="topbar">
         <h2>Add Purchase & Details</h2>

@@ -105,7 +105,11 @@ a{
 
 <form method="POST">
 
+<<<<<<< HEAD
 <input type="text" name="id" placeholder="Enter ID" required>
+=======
+<input type="number" name="id" placeholder="Enter ID" required>
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
 <input type="text" name="username" placeholder="Enter Username" required>
 <input type="password" name="password" placeholder="Enter Password" required>
 

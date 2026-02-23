@@ -7,6 +7,10 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
     exit();
 }
 
+<<<<<<< HEAD
+=======
+// Fetch purchases with dynamic total from purchase_details
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
 $sql = "
 SELECT p.purchase_id, p.vendor_id, p.purchase_date, 
        IFNULL(SUM(pd.quantity * pd.cost_price),0) AS total_amount
@@ -24,6 +28,10 @@ if($result){
     }
 }
 
+<<<<<<< HEAD
+=======
+// Fetch vendors for name display
+>>>>>>> 1c4873777fa8a1ed238614dc3b9c96119edb2241
 $vendor_result = $conn->query("SELECT vendor_id, name FROM vendor");
 $vendors = [];
 if($vendor_result){
