@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../config/db.php";
+require_once "config.php";
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
     http_response_code(403);

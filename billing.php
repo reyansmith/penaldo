@@ -3,7 +3,7 @@ session_start();
 require_once ("config.php");
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
-    header("Location: ../mlogin.php");
+    header("Location: mlogin.php");
     exit();
 }
 
@@ -36,7 +36,7 @@ if ($result) {
             <h2>Billing</h2>
         </div>
         <div class="top-actions">
-            <a href="../logout.php" class="logout-btn">Logout</a>
+            <a href="logout.php" class="logout-btn">Logout</a>
         </div>
     </div>
 
@@ -60,7 +60,7 @@ if ($result) {
                     <?php } else { ?>
                         <?php foreach ($bills as $bill) { ?>
                             <tr>
-                                <td><?php echo (int)$bill['bill_id']; ?></td>
+                                <td><?php echo htmlspecialchars((string)$bill['bill_id'], ENT_QUOTES, "UTF-8"); ?></td>
                                 <td><?php echo date("d M Y, h:i A", strtotime($bill['bill_date'])); ?></td>
                                 <td><?php echo htmlspecialchars($bill['customer_name'] ?? '-', ENT_QUOTES, "UTF-8"); ?></td>
                                 <td><?php echo htmlspecialchars($bill['employee_name'] ?? '-', ENT_QUOTES, "UTF-8"); ?></td>

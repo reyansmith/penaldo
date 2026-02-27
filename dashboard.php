@@ -4,7 +4,7 @@ require_once ("config.php");
 
 /* -------- SESSION PROTECTION -------- */
 if(!isset($_SESSION['role']) || $_SESSION['role'] != "admin"){
-    header("Location: ../mlogin.php");
+    header("Location: mlogin.php");
     exit();
 }
 
@@ -87,7 +87,7 @@ if ($result) {
 <?php include("header.php"); ?>
 <?php include("sidebar.php"); ?>
 
-<div class="main">
+<div class="main dashboard-page">
 
     <div class="topbar">
         <div class="topbar-text">
@@ -95,7 +95,7 @@ if ($result) {
         </div>
 
         <div class="top-actions">
-            <a href="../logout.php" class="logout-btn">Logout</a>
+            <a href="logout.php" class="logout-btn">Logout</a>
         </div>
     </div>
 
@@ -186,7 +186,7 @@ if ($result) {
                     <?php } else { ?>
                         <?php foreach($recentTransactions as $txn){ ?>
                             <tr>
-                                <td><?php echo (int)$txn['bill_id']; ?></td>
+                                <td><?php echo htmlspecialchars((string)$txn['bill_id'], ENT_QUOTES, "UTF-8"); ?></td>
                                 <td><?php echo date("d M Y, h:i A", strtotime($txn['bill_date'])); ?></td>
                                 <td><?php echo htmlspecialchars($txn['customer_name'] ?? '-', ENT_QUOTES, "UTF-8"); ?></td>
                                 <td><?php echo htmlspecialchars($txn['employee_name'] ?? '-', ENT_QUOTES, "UTF-8"); ?></td>
